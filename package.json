@@ -1,0 +1,51 @@
+{
+  "name": "intent-utterance-expand",
+  "version": "0.0.1",
+  "description": "Expand custom utterance slots of phrases, to use with Alexa Skills Kit Sample Utterances",
+  "main": "intent-utterance-expand.js",
+
+  "directories": {
+    "test": "test"
+  },
+  "files": [
+    "intent-utterance-expand.js"
+  ],
+  "scripts": {
+    "test": "./node_modules/tape/bin/tape test/*.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/miguelmota/intent-utterance-expand"
+  },
+  "keywords": [
+    "intent",
+    "utterance",
+    "file",
+    "expander",
+    "amazon",
+    "alexa",
+    "echo",
+    "ask",
+    "speech",
+    "voice"
+  ],
+  "author": {
+    "name": "Miguel Mota",
+    "email": "hello@miguelmota.com",
+    "url": "http://www.miguelmota.com/"
+  },
+  "license": {
+    "type": "MIT",
+    "url": "https://github.com/miguelmota/intent-utterance-expand/blob/master/LICENSE.md"
+  },
+  "bugs": {
+    "url": "https://github.com/miguelmota/intent-utterance-expand/issues"
+  },
+  "homepage": "https://github.com/miguelmota/intent-utterance-expand",
+  "devDependencies": {
+    "tape": "^3.0.3"
+  },
+  "engines": {
+    "node": ">=0.10.0"
+  }
+}
