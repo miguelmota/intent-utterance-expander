@@ -4,7 +4,7 @@ var intentUtteranceExpand = require('../intent-utterance-expand');
 test('intentUtteranceExpand', function (t) {
   'use strict';
 
-  t.plan(11);
+  t.plan(14);
 
   t.deepEqual(intentUtteranceExpand(), []);
   t.deepEqual(intentUtteranceExpand({}), []);
@@ -45,5 +45,25 @@ test('intentUtteranceExpand', function (t) {
       `when's the Dodger's game?`
     ]
   );
+
+  t.deepEqual(intentUtteranceExpand(`hello {monday|day}`), [
+    `hello {monday|day}`
+  ]);
+
+  t.deepEqual(intentUtteranceExpand(`hello {(monday|tuesday)|day}`), [
+    `hello {monday|day}`,
+    `hello {tuesday|day}`
+  ]);
+
+  t.deepEqual(intentUtteranceExpand(`(today is|today's) (|a) {(monday|tuesday)|day}`), [
+    `today is a {monday|day}`,
+    `today is a {tuesday|day}`,
+    `today is {monday|day}`,
+    `today is {tuesday|day}`,
+    `today's a {monday|day}`,
+    `today's a {tuesday|day}`,
+    `today's {monday|day}`,
+    `today's {tuesday|day}`
+  ]);
 
 });

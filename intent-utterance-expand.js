@@ -10,7 +10,7 @@
         return [];
       }
 
-      const parts = phrase.match(/\{.*?\}+|\(.*?\)+|[^[\s]+/gi);
+      const parts = phrase.match(/\{\(.*?\)\}+|\{.*?\}+|\(.*?\)+|[^[\s]+/gi);
       const phrases = [];
 
       if (Array.isArray(parts)) {
@@ -19,20 +19,36 @@
           const part = parts[i];
 
           if (expandSlotRegex.test(part)) {
-            const words = part.match(expandSlotWordRegex);
 
-            for (var j = 0; j < words.length; j++) {
-              const word = words[j];
-              var copy = parts.slice(0);
+            if (/^\{.*\}$/.test(part)) {
+              var words = part.match(/\{\((.*)\).*\|.*\}/i);
+              if (Array.isArray(words) && words[1]) {
+                words = words[1].split('|');
 
-              copy.splice(i, 1, word);
-              phrases.push(copy);
+                for (var j = 0; j < words.length; j++) {
+                  const slot = part.replace(/\(.*\)/i, words[j]);
+                  const copy = parts.slice(0);
 
-              // remove word, ie. (|foo)
-              if (words.length === 1) {
-                copy = parts.slice(0);
-                copy.splice(i, 1);
+                  copy.splice(i, 1, slot);
+                  phrases.push(copy);
+                }
+              }
+            } else {
+              const words = part.match(/([^||()]+)/gi);
+
+              for (var j = 0; j < words.length; j++) {
+                const word = words[j];
+                var copy = parts.slice(0);
+
+                copy.splice(i, 1, word);
                 phrases.push(copy);
+
+                // remove word, ie. (|foo)
+                if (words.length === 1) {
+                  copy = parts.slice(0);
+                  copy.splice(i, 1);
+                  phrases.push(copy);
+                }
               }
             }
 

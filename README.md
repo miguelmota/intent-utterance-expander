@@ -40,6 +40,20 @@ console.log(intentUtteranceExpand(`(when is|when's) the (|next) Dodger's (|baseb
   "when's the Dodger's game?"
 ]
 */
+
+console.log(intentUtteranceExpand(`(today is|today's) (|a) {(monday|tuesday)|day}`));
+/*
+[
+  "today is a {monday|day}",
+  "today is a {tuesday|day}",
+  "today is {monday|day}",
+  "today is {tuesday|day}",
+  "today's a {monday|day}",
+  "today's a {tuesday|day}",
+  "today's {monday|day}",
+  "today's {tuesday|day}"
+]
+*/
 ```
 
 # Test
