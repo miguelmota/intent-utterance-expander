@@ -6,6 +6,10 @@
     const expandSlotWordRegex = /([^||()]+)/gi;
 
     function expand(phrase) {
+      if (typeof phrase !== 'string') {
+        return [];
+      }
+
       const parts = phrase.match(/\{.*?\}+|\(.*?\)+|[^[\s]+/gi);
       const phrases = [];
 

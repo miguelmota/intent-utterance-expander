@@ -4,7 +4,14 @@ var intentUtteranceExpand = require('../intent-utterance-expand');
 test('intentUtteranceExpand', function (t) {
   'use strict';
 
-  t.plan(5);
+  t.plan(11);
+
+  t.deepEqual(intentUtteranceExpand(), []);
+  t.deepEqual(intentUtteranceExpand({}), []);
+  t.deepEqual(intentUtteranceExpand([]), []);
+  t.deepEqual(intentUtteranceExpand(function() {}), []);
+  t.deepEqual(intentUtteranceExpand(''), ['']);
+  t.deepEqual(intentUtteranceExpand('foo'), ['foo']);
 
   t.deepEqual(intentUtteranceExpand(`hello world`), [
     `hello world`
