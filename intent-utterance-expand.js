@@ -2,31 +2,41 @@
   'use strict';
 
   function intentUtteranceExpand(phrase) {
+    const phrasePartsRegex = /\{\(.*?\)\}+|\{.*?\}+|\(.*?\)+|[^[\s]+/gi;
+    const slotRegex = /^\{.*\}$/i;
     const expandSlotRegex = /\(.*\|.*\)/gi;
     const expandSlotWordRegex = /([^||()]+)/gi;
+    const wordsInsideExpandSlotRegex = /([^||()]+)/gi;
+    const wordsInsideSlotRegex = /\{\((.*)\).*\|.*\}/i;
+    const insideParensRegex = /\(.*\)/i;
 
     function expand(phrase) {
       if (typeof phrase !== 'string') {
         return [];
       }
 
-      const parts = phrase.match(/\{\(.*?\)\}+|\{.*?\}+|\(.*?\)+|[^[\s]+/gi);
+      phrasePartsRegex.lastIndex = 0;
+      const parts = phrase.match(phrasePartsRegex);
       const phrases = [];
 
       if (Array.isArray(parts)) {
         for (var i = 0; i < parts.length; i++) {
           expandSlotRegex.lastIndex = 0;
+          slotRegex.lastIndex = 0;
           const part = parts[i];
 
           if (expandSlotRegex.test(part)) {
 
-            if (/^\{.*\}$/.test(part)) {
-              var words = part.match(/\{\((.*)\).*\|.*\}/i);
-              if (Array.isArray(words) && words[1]) {
-                words = words[1].split('|');
+            if (slotRegex.test(part)) {
+              wordsInsideSlotRegex.lastIndex = 0;
+              const wordsMatch = part.match(wordsInsideSlotRegex);
+
+              if (Array.isArray(wordsMatch) && wordsMatch[1]) {
+                const words = wordsMatch[1].split('|');
 
                 for (var j = 0; j < words.length; j++) {
-                  const slot = part.replace(/\(.*\)/i, words[j]);
+                  insideParensRegex.lastIndex = 0;
+                  const slot = part.replace(insideParensRegex, words[j]);
                   const copy = parts.slice(0);
 
                   copy.splice(i, 1, slot);
@@ -34,7 +44,8 @@
                 }
               }
             } else {
-              const words = part.match(/([^||()]+)/gi);
+              wordsInsideExpandSlotRegex.lastIndex = 0;
+              const words = part.match(wordsInsideExpandSlotRegex);
 
               for (var j = 0; j < words.length; j++) {
                 const word = words[j];
