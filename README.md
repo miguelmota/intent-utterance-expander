@@ -1,23 +1,23 @@
-# intent-utterance-expand
+# intent-utterance-expander
 
 > Expand custom utterance slots of phrases, to use with [Alexa Skills Kit Sample Utterances](https://developer.amazon.com/public/solutions/alexa/alexa-skills-kit/docs/defining-the-voice-interface).
 
 # Install
 
 ```bash
-npm install intent-utterance-expand
+npm install intent-utterance-expander
 ```
 
 ```bash
-bower install intent-utterance-expand
+bower install intent-utterance-expander
 ```
 
 # Usage
 
 ```javascript
-const intentUtteranceExpand = require('intent-utterance-expand');
+const intentUtteranceExpander = require('intent-utterance-expander');
 
-console.log(intentUtteranceExpand(`(hello|hi) (|mighty) world`));
+console.log(intentUtteranceExpander(`(hello|hi) (|mighty) world`));
 /*
 [
   "hello mighty world",
@@ -27,7 +27,7 @@ console.log(intentUtteranceExpand(`(hello|hi) (|mighty) world`));
 ]
 */
 
-console.log(intentUtteranceExpand(`(when is|when's) the (|next) Dodger's (|baseball) game?`));
+console.log(intentUtteranceExpander(`(when is|when's) the (|next) Dodger's (|baseball) game?`));
 /*
 [
   "when is the next Dodger's baseball game?",
@@ -41,7 +41,7 @@ console.log(intentUtteranceExpand(`(when is|when's) the (|next) Dodger's (|baseb
 ]
 */
 
-console.log(intentUtteranceExpand(`(today is|today's) (|a) {(monday|tuesday)|day}`));
+console.log(intentUtteranceExpander(`(today is|today's) (|a) {(monday|tuesday)|day}`));
 /*
 [
   "today is a {monday|day}",
