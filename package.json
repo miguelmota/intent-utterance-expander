@@ -1,6 +1,6 @@
 {
   "name": "intent-utterance-expander",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Expand custom utterance slots of phrases, to use with Alexa Skills Kit Sample Utterances",
   "main": "intent-utterance-expander.js",
 

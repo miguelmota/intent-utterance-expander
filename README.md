@@ -27,6 +27,20 @@ console.log(intentUtteranceExpander(`(hello|hi) (|mighty) world`));
 ]
 */
 
+console.log(intentUtteranceExpander([`hello (|mighty) world`, `(great|good) day`]);
+/*
+[
+  [
+    "hello mighty world",
+    "hello world"
+  ],
+  [
+    "great day",
+    "good day"
+  ]
+]
+*/
+
 console.log(intentUtteranceExpander(`(when is|when's) the (|next) Dodger's (|baseball) game?`));
 /*
 [

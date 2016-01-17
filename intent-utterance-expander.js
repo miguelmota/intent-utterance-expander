@@ -1,11 +1,16 @@
 (function(root) {
   'use strict';
 
-  function intentUtteranceExpand(phrase) {
+  function intentUtteranceExpander(originalPhrase) {
+    if (Array.isArray(originalPhrase)) {
+      return originalPhrase.map(intentUtteranceExpander);
+    }
+
     const phrasePartsRegex = /\{\(.*?\)\}+|\{.*?\}+|\(.*?\)+|[^[\s]+/gi;
     const slotRegex = /^\{.*\}$/i;
     const expandSlotRegex = /\(.*\|.*\)/gi;
     const expandSlotWordRegex = /([^||()]+)/gi;
+    const singleWordInsideExpandSlotRegex = /\((\w+)\)/gi;
     const wordsInsideExpandSlotRegex = /([^||()]+)/gi;
     const wordsInsideSlotRegex = /\{\((.*)\).*\|.*\}/i;
     const insideParensRegex = /\(.*\)/i;
@@ -15,6 +20,9 @@
         return [];
       }
 
+      singleWordInsideExpandSlotRegex.lastIndex = 0;
+      phrase = phrase.replace(singleWordInsideExpandSlotRegex, '$1');
+
       phrasePartsRegex.lastIndex = 0;
       const parts = phrase.match(phrasePartsRegex);
       const phrases = [];
@@ -23,7 +31,7 @@
         for (var i = 0; i < parts.length; i++) {
           expandSlotRegex.lastIndex = 0;
           slotRegex.lastIndex = 0;
-          const part = parts[i];
+          var part = parts[i];
 
           if (expandSlotRegex.test(part)) {
 
@@ -37,7 +45,7 @@
                 for (var j = 0; j < words.length; j++) {
                   insideParensRegex.lastIndex = 0;
                   const slot = part.replace(insideParensRegex, words[j]);
-                  const copy = parts.slice(0);
+                  var copy = parts.slice(0);
 
                   copy.splice(i, 1, slot);
                   phrases.push(copy);
@@ -48,7 +56,7 @@
               const words = part.match(wordsInsideExpandSlotRegex);
 
               for (var j = 0; j < words.length; j++) {
-                const word = words[j];
+                var word = words[j];
                 var copy = parts.slice(0);
 
                 copy.splice(i, 1, word);
@@ -90,20 +98,20 @@
       }
     }
 
-    return expand(phrase);
+    return expand(originalPhrase);
   }
 
   if (typeof exports !== 'undefined') {
     if (typeof module !== 'undefined' && module.exports) {
-      exports = module.exports = intentUtteranceExpand;
+      exports = module.exports = intentUtteranceExpander;
     }
-    exports.intentUtteranceExpand = intentUtteranceExpand;
+    exports.intentUtteranceExpander = intentUtteranceExpander;
   } else if (typeof define === 'function' && define.amd) {
     define([], function() {
-      return intentUtteranceExpand;
+      return intentUtteranceExpander;
     });
   } else {
-    root.intentUtteranceExpand = intentUtteranceExpand;
+    root.intentUtteranceExpander = intentUtteranceExpander;
   }
 
 })(this);
