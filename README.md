@@ -2,6 +2,10 @@
 
 > Expand custom utterance slots of phrases, to use with [Alexa Skills Kit Sample Utterances](https://developer.amazon.com/public/solutions/alexa/alexa-skills-kit/docs/defining-the-voice-interface).
 
+# Demo
+
+[http://lab.moogs.io/intent-utterance-expander](http://lab.moogs.io/intent-utterance-expander)
+
 # Install
 
 ```bash
