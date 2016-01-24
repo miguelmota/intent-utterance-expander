@@ -8,7 +8,7 @@
     "test": "test"
   },
   "files": [
-    "intent-utterance-expand.js"
+    "intent-utterance-expander.js"
   ],
   "scripts": {
     "test": "./node_modules/tape/bin/tape test/*.js"
