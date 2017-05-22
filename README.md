@@ -4,7 +4,7 @@
 
 # Demo
 
-[http://lab.moogs.io/intent-utterance-expander](http://lab.moogs.io/intent-utterance-expander)
+[https://lab.miguelmota.com/intent-utterance-expander](https://lab.miguelmota.com/intent-utterance-expander)
 
 # Install
 
