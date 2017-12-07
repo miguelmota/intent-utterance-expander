@@ -63,12 +63,22 @@
                 phrases.push(copy);
 
                 // remove word, ie. (|foo)
-                if (words.length === 1) {
-                  copy = parts.slice(0);
-                  copy.splice(i, 1);
-                  phrases.push(copy);
-                }
               }
+            }
+
+            if (part.startsWith("(|")) {
+                          copy = parts.slice(0);
+                          copy.splice(i, 1);
+                          phrases.push(copy);
+            } else if (part.endsWith("|)")) {
+                          copy = parts.slice(0);
+                          copy.splice(i, parts.length);
+                          phrases.push(copy);
+            } else if (part.includes("||")) {
+                          copy = parts.slice(0);
+                          let a = copy.slice(0, i);
+                          let b = copy.slice(i + 1, parts.length);
+                          phrases.push(a.concat(b));
             }
 
             break;
