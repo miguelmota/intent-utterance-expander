@@ -12,10 +12,6 @@
 npm install intent-utterance-expander
 ```
 
-```bash
-bower install intent-utterance-expander
-```
-
 # Usage
 
 ```javascript
