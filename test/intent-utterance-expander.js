@@ -4,7 +4,7 @@ var intentUtteranceExpander = require('../intent-utterance-expander');
 test('intentUtteranceExpander', function (t) {
   'use strict';
 
-  t.plan(16);
+  t.plan(17);
 
   t.deepEqual(intentUtteranceExpander(), []);
   t.deepEqual(intentUtteranceExpander({}), []);
@@ -81,4 +81,12 @@ test('intentUtteranceExpander', function (t) {
     `today's {tuesday|day}`
   ]);
 
+  t.deepEqual(intentUtteranceExpander(`(hello|hi) (|mighty|wonder) world`), [
+    `hello mighty world`,
+    `hello wonder world`,
+    `hello world`,
+    `hi mighty world`,
+    `hi wonder world`,
+    `hi world`
+  ]);
 });
