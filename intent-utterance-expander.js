@@ -74,8 +74,8 @@
               phrases.push(copy);
             } else if (part.includes('||')) {
               copy = parts.slice(0);
-              let a = copy.slice(0, i);
-              let b = copy.slice(i + 1, 1);
+              var a = copy.slice(0, i);
+              var b = copy.slice(i + 1, 1);
               phrases.push(a.concat(b));
             }
 
