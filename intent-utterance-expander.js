@@ -70,12 +70,12 @@
               phrases.push(copy);
             } else if (part.endsWith('|)')) {
               copy = parts.slice(0);
-              copy.splice(i, parts.length);
+              copy.splice(i, 1);
               phrases.push(copy);
             } else if (part.includes('||')) {
               copy = parts.slice(0);
-              var a = copy.slice(0, i);
-              var b = copy.slice(i + 1, parts.length);
+              let a = copy.slice(0, i);
+              let b = copy.slice(i + 1, 1);
               phrases.push(a.concat(b));
             }
 
